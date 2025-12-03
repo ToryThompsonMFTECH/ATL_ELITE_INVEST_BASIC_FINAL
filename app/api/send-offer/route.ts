@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import nodemailer from 'nodemailer'
+import { Resend } from 'resend'
 
 const offerFormSchema = z.object({
   fullName: z.string().min(2),
@@ -36,27 +36,22 @@ export async function OPTIONS() {
 
 export async function POST(request: NextRequest) {
   try {
-
     // Parse and validate request body
     const body = await request.json()
     const validatedData = offerFormSchema.parse(body)
 
-    // Configure email transporter
-    // For production, use environment variables for SMTP credentials
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.gmail.com',
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: false, // true for 465, false for other ports
-      auth: {
-        user: process.env.SMTP_USER || process.env.EMAIL_USER,
-        pass: process.env.SMTP_PASS || process.env.EMAIL_PASSWORD,
-      },
-    })
-
-    // Verify transporter configuration
-    if (!process.env.SMTP_USER && !process.env.EMAIL_USER) {
-      console.warn('SMTP credentials not configured. Using placeholder.')
+    // Initialize Resend
+    const resendApiKey = process.env.RESEND_API_KEY
+    
+    if (!resendApiKey) {
+      console.error('RESEND_API_KEY environment variable is not set.')
+      return NextResponse.json(
+        { error: 'Email service not configured. Please contact support.' },
+        { status: 500, headers: { 'Access-Control-Allow-Origin': '*' } }
+      )
     }
+
+    const resend = new Resend(resendApiKey)
 
     // Format email content
     const emailHtml = `
@@ -140,17 +135,17 @@ ${validatedData.bedrooms ? `Bedrooms: ${validatedData.bedrooms}\n` : ''}${valida
 ${validatedData.reasonForSelling ? `Reason for Selling: ${validatedData.reasonForSelling}` : ''}
     `.trim()
 
-    // Send email
-    const mailOptions = {
-      from: process.env.SMTP_FROM || process.env.EMAIL_USER || 'noreply@atlantaelite.com',
+    // Send email using Resend
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
+    
+    await resend.emails.send({
+      from: fromEmail,
       to: 'mftechconsulting@gmail.com',
+      replyTo: validatedData.email,
       subject: `New Cash Offer Request from ${validatedData.fullName}`,
       text: emailText,
       html: emailHtml,
-      replyTo: validatedData.email,
-    }
-
-    await transporter.sendMail(mailOptions)
+    })
 
     // Log success
     console.log(`Offer request submitted successfully for ${validatedData.email}`)
@@ -160,8 +155,12 @@ ${validatedData.reasonForSelling ? `Reason for Selling: ${validatedData.reasonFo
       { status: 200, headers: corsHeaders }
     )
   } catch (error) {
-    // Log error
+    // Log error with more details
     console.error('Error processing offer request:', error)
+    if (error instanceof Error) {
+      console.error('Error message:', error.message)
+      console.error('Error stack:', error.stack)
+    }
 
     // Handle validation errors
     if (error instanceof z.ZodError) {
@@ -173,9 +172,11 @@ ${validatedData.reasonForSelling ? `Reason for Selling: ${validatedData.reasonFo
 
     // Handle other errors
     return NextResponse.json(
-      { error: 'Failed to submit offer request. Please try again or contact us directly.' },
+      { 
+        error: 'Failed to submit offer request. Please try again or contact us directly.',
+        details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : 'Unknown error') : undefined
+      },
       { status: 500, headers: { 'Access-Control-Allow-Origin': '*' } }
     )
   }
 }
-
