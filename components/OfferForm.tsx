@@ -3,7 +3,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const offerFormSchema = z.object({
   fullName: z.string().min(2, 'Name must be at least 2 characters'),
@@ -29,6 +29,7 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  const [showModal, setShowModal] = useState(false)
 
   const {
     register,
@@ -63,6 +64,7 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
       }
 
       setSubmitStatus('success')
+      setShowModal(true)
       reset()
     } catch (error) {
       setSubmitStatus('error')
@@ -74,24 +76,117 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
     }
   }
 
-  return (
-    <section id="offer-form" className={`section-container bg-primary-50 ${className}`}>
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="heading-secondary">Get Your Cash Offer Today</h2>
-          <p className="text-body">
-            Fill out the form below and we&apos;ll send you a fair cash offer within 24 hours. No obligation, no hassle.
-          </p>
-        </div>
+  // Close modal on Escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && showModal) {
+        setShowModal(false)
+      }
+    }
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [showModal])
 
-        <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-2xl shadow-xl p-8 md:p-10">
-          {submitStatus === 'success' && (
-            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-              <p className="text-green-800 font-semibold">
-                ✓ Thank you! We&apos;ve received your information and will contact you within 24 hours with your cash offer.
-              </p>
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [showModal])
+
+  return (
+    <>
+      {/* Thank You Modal */}
+      {showModal && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn"
+          onClick={() => setShowModal(false)}
+        >
+          <div 
+            className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative animate-slideUp"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+              aria-label="Close modal"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Success Icon */}
+            <div className="flex justify-center mb-6">
+              <div className="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center">
+                <svg className="w-12 h-12 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
             </div>
-          )}
+
+            {/* Content */}
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                Thank You!
+              </h3>
+              <p className="text-gray-700 mb-4">
+                We&apos;ve received your information and will contact you within <strong>24 hours</strong> with your cash offer.
+              </p>
+              <div className="bg-primary-50 rounded-lg p-4 mb-6">
+                <p className="text-sm text-gray-700 mb-2">
+                  <strong>What happens next?</strong>
+                </p>
+                <ul className="text-sm text-gray-600 text-left space-y-1">
+                  <li className="flex items-start">
+                    <span className="text-primary-600 mr-2">✓</span>
+                    <span>We&apos;ll review your property details</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-600 mr-2">✓</span>
+                    <span>You&apos;ll receive a fair cash offer via email</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-600 mr-2">✓</span>
+                    <span>Our team will follow up with you directly</span>
+                  </li>
+                </ul>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="flex-1 bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+                >
+                  Got It
+                </button>
+                <a
+                  href="tel:+14046665583"
+                  className="flex-1 bg-navy-600 hover:bg-navy-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors text-center"
+                >
+                  Call Us Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <section id="offer-form" className={`section-container bg-primary-50 ${className}`}>
+        <div className="max-w-2xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="heading-secondary">Get Your Cash Offer Today</h2>
+            <p className="text-body">
+              Fill out the form below and we&apos;ll send you a fair cash offer within 24 hours. No obligation, no hassle.
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit(onSubmit)} className="bg-white rounded-2xl shadow-xl p-8 md:p-10">
 
           {submitStatus === 'error' && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
@@ -341,6 +436,7 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
         </form>
       </div>
     </section>
+    </>
   )
 }
 
