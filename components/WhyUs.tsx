@@ -37,7 +37,7 @@ export default function WhyUs() {
       <div className="text-center mb-16">
         <h2 className="heading-secondary">Why Choose Atlanta Elite Investment Properties</h2>
         <p className="text-body max-w-2xl mx-auto">
-          We make selling your house simple, fast, and stress-free. Here's what sets us apart from the competition.
+          We make selling your house simple, fast, and stress-free. Here&apos;s what sets us apart from the competition.
         </p>
       </div>
       
@@ -61,7 +61,7 @@ export default function WhyUs() {
       <div className="mt-12 text-center">
         <div className="inline-block bg-primary-50 rounded-2xl p-8 border-2 border-primary-200">
           <p className="text-xl font-semibold text-gray-900 mb-2">
-            We'll do our very best to bring you an offer that works.
+            We&apos;ll do our very best to bring you an offer that works.
           </p>
           <p className="text-gray-600">
             No obligation, no pressure, just a fair cash offer for your property.

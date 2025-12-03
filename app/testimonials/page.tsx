@@ -155,7 +155,7 @@ export default function TestimonialsPage() {
           <div className="text-center mb-16">
             <h2 className="heading-secondary">What Our Clients Say</h2>
             <p className="text-body max-w-2xl mx-auto">
-              Don't just take our word for it. Here's what real Atlanta homeowners have to say about working with Atlanta Elite Investment Properties.
+              Don&apos;t just take our word for it. Here&apos;s what real Atlanta homeowners have to say about working with Atlanta Elite Investment Properties.
             </p>
           </div>
           
@@ -181,7 +181,7 @@ export default function TestimonialsPage() {
                   </div>
                 </div>
                 <p className="text-gray-700 leading-relaxed italic">
-                  "{testimonial.text}"
+                  &quot;{testimonial.text}&quot;
                 </p>
               </div>
             ))}

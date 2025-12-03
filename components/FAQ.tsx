@@ -46,7 +46,7 @@ export default function FAQ() {
       <div className="text-center mb-16">
         <h2 className="heading-secondary">Frequently Asked Questions</h2>
         <p className="text-body max-w-2xl mx-auto">
-          Have questions? We've got answers. Here are the most common questions we receive.
+          Have questions? We&apos;ve got answers. Here are the most common questions we receive.
         </p>
       </div>
       

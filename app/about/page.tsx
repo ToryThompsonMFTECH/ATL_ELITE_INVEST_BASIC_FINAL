@@ -75,15 +75,15 @@ export default function AboutPage() {
           
           <div className="prose prose-lg max-w-none">
             <p className="text-body mb-6">
-              Atlanta Elite Investment Properties was founded with a simple mission: to provide Atlanta homeowners with a better, faster, and more transparent way to sell their properties. We understand that selling a house can be stressful, time-consuming, and expensive, especially when you're dealing with repairs, realtor fees, and lengthy closing processes.
+              Atlanta Elite Investment Properties was founded with a simple mission: to provide Atlanta homeowners with a better, faster, and more transparent way to sell their properties. We understand that selling a house can be stressful, time-consuming, and expensive, especially when you&apos;re dealing with repairs, realtor fees, and lengthy closing processes.
             </p>
             
             <p className="text-body mb-6">
-              Our team of experienced real estate professionals has helped hundreds of homeowners across the Atlanta metropolitan area sell their properties quickly and efficiently. Whether you're facing foreclosure, dealing with an inherited property, relocating for work, or simply need to sell fast, we're here to help.
+              Our team of experienced real estate professionals has helped hundreds of homeowners across the Atlanta metropolitan area sell their properties quickly and efficiently. Whether you&apos;re facing foreclosure, dealing with an inherited property, relocating for work, or simply need to sell fast, we&apos;re here to help.
             </p>
             
             <p className="text-body mb-6">
-              What sets us apart is our commitment to transparency, fairness, and customer service. We don't use high-pressure sales tactics or make lowball offers. Instead, we provide fair, market-based cash offers and handle every aspect of the transaction, making the process as smooth and stress-free as possible for our clients.
+              What sets us apart is our commitment to transparency, fairness, and customer service. We don&apos;t use high-pressure sales tactics or make lowball offers. Instead, we provide fair, market-based cash offers and handle every aspect of the transaction, making the process as smooth and stress-free as possible for our clients.
             </p>
           </div>
         </div>
@@ -109,7 +109,7 @@ export default function AboutPage() {
               <div className="text-5xl mb-4">⚡</div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Speed</h3>
               <p className="text-gray-600">
-                We understand time is valuable. That's why we provide offers within 24 hours and can close in as little as 7 days.
+                We understand time is valuable. That&apos;s why we provide offers within 24 hours and can close in as little as 7 days.
               </p>
             </div>
             
@@ -151,7 +151,7 @@ export default function AboutPage() {
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">No Obligation</h3>
                 <p className="text-gray-600">
-                  Getting an offer from us is completely free and comes with no obligation. You're in control every step of the way, and you can walk away at any time.
+                  Getting an offer from us is completely free and comes with no obligation. You&apos;re in control every step of the way, and you can walk away at any time.
                 </p>
               </div>
             </div>
@@ -163,7 +163,7 @@ export default function AboutPage() {
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">As-Is Purchases</h3>
                 <p className="text-gray-600">
-                  We buy houses in any condition. No need for repairs, cleaning, or staging. We'll take your property exactly as it is, saving you time and money.
+                  We buy houses in any condition. No need for repairs, cleaning, or staging. We&apos;ll take your property exactly as it is, saving you time and money.
                 </p>
               </div>
             </div>
@@ -175,7 +175,7 @@ export default function AboutPage() {
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Flexible Closing</h3>
                 <p className="text-gray-600">
-                  We work around your schedule. Need to close fast? We can do it in 7 days. Need more time? We'll accommodate your timeline.
+                  We work around your schedule. Need to close fast? We can do it in 7 days. Need more time? We&apos;ll accommodate your timeline.
                 </p>
               </div>
             </div>
@@ -193,7 +193,7 @@ export default function AboutPage() {
             Ready to Sell Your House?
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Get a fair cash offer for your Atlanta property. No obligation, no fees, no hassle. Let's get started today.
+            Get a fair cash offer for your Atlanta property. No obligation, no fees, no hassle. Let&apos;s get started today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

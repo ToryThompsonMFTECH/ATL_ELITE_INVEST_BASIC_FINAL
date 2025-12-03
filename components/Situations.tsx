@@ -8,7 +8,7 @@ export default function Situations() {
     {
       icon: '🏛️',
       title: 'Inherited Property?',
-      description: 'Don\'t want to deal with an inherited house? We\'ll buy it as-is, no questions asked.',
+      description: 'Don&apos;t want to deal with an inherited house? We&apos;ll buy it as-is, no questions asked.',
     },
     {
       icon: '💔',
@@ -39,7 +39,7 @@ export default function Situations() {
           We Buy Houses in Any Situation
         </h2>
         <p className="text-xl text-white/90 max-w-2xl mx-auto">
-          No matter your circumstances, we can help. We've seen it all and we're here to make selling easy.
+          No matter your circumstances, we can help. We&apos;ve seen it all and we&apos;re here to make selling easy.
         </p>
       </div>
       

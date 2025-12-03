@@ -80,7 +80,7 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
         <div className="text-center mb-12">
           <h2 className="heading-secondary">Get Your Cash Offer Today</h2>
           <p className="text-body">
-            Fill out the form below and we'll send you a fair cash offer within 24 hours. No obligation, no hassle.
+            Fill out the form below and we&apos;ll send you a fair cash offer within 24 hours. No obligation, no hassle.
           </p>
         </div>
 
@@ -88,7 +88,7 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
           {submitStatus === 'success' && (
             <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
               <p className="text-green-800 font-semibold">
-                ✓ Thank you! We've received your information and will contact you within 24 hours with your cash offer.
+                ✓ Thank you! We&apos;ve received your information and will contact you within 24 hours with your cash offer.
               </p>
             </div>
           )}

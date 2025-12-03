@@ -25,7 +25,7 @@ export default function AreasServed() {
       <div className="text-center mb-12">
         <h2 className="heading-secondary">Areas We Serve</h2>
         <p className="text-body max-w-2xl mx-auto">
-          We buy houses throughout Atlanta and surrounding Georgia areas. Don't see your area? Contact us anyway - we may still be able to help!
+          We buy houses throughout Atlanta and surrounding Georgia areas. Don&apos;t see your area? Contact us anyway - we may still be able to help!
         </p>
       </div>
       
