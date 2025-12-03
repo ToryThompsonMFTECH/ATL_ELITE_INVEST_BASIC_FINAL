@@ -8,7 +8,6 @@ Atlanta Elite Investment Properties helps homeowners sell their houses quickly f
 
 ## Contact
 
-- **Phone:** (404) 666-5583
 - **Email:** mftechconsulting@gmail.com
 - **Website:** [Atlanta Elite Investment Properties](https://your-domain.com)
 
