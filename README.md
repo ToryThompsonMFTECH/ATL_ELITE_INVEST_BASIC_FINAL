@@ -10,6 +10,9 @@ A production-ready real estate investor website built with Next.js, TypeScript, 
 - 🎯 SEO optimized with proper metadata
 - ♿ Accessible and mobile-first design
 - ⚡ Fast performance with Next.js 14
+- 🎨 Navy blue and green color scheme
+- ✨ Parallax effects on hero sections
+- 🗺️ Google Maps integration in forms
 
 ## Tech Stack
 
@@ -103,7 +106,7 @@ npm start
 
 ## Email Configuration
 
-The website uses Nodemailer to send emails via SMTP. The API route at `/app/api/send-offer/route.ts` handles form submissions and sends them to `atlantaeliteoffers@gmail.com`.
+The website uses Nodemailer to send emails via SMTP. The API route at `/app/api/send-offer/route.ts` handles form submissions and sends them to `mftechconsulting@gmail.com`.
 
 ### Supported Email Providers
 
@@ -117,7 +120,7 @@ You can test the email functionality by:
 1. Setting up your SMTP credentials in `.env.local`
 2. Submitting the form on the website
 3. Checking the console for logs
-4. Verifying the email arrives at `atlantaeliteoffers@gmail.com`
+4. Verifying the email arrives at `mftechconsulting@gmail.com`
 
 ## Deployment
 
@@ -158,14 +161,13 @@ Make sure to add your environment variables in each platform's settings.
 ### Update Company Information
 
 1. **Company Name:** The company name is set to "Atlanta Elite Investment Properties" throughout the codebase
-2. **Contact Email:** Update `atlantaeliteoffers@gmail.com` in:
+2. **Contact Email:** Update `mftechconsulting@gmail.com` in:
    - `app/api/send-offer/route.ts` (line with `to:`)
-   - `components/Footer.tsx`
-3. **Phone Number:** Update in `components/Footer.tsx`
+3. **Phone Number:** Update `(404) 666-5583` throughout components
 
 ### Styling
 
-- **Colors:** Modify `tailwind.config.ts` to change the primary color scheme
+- **Colors:** Modify `tailwind.config.ts` to change the primary color scheme (navy blue and green)
 - **Fonts:** Update the font import in `app/layout.tsx`
 - **Components:** All components are in the `components/` directory
 
@@ -199,4 +201,3 @@ This project is proprietary and confidential.
 ---
 
 Built with ❤️ for Atlanta Elite Investment Properties
-
