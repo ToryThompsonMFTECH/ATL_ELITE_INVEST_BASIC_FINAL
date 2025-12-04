@@ -138,8 +138,9 @@ ${validatedData.reasonForSelling ? `Reason for Selling: ${validatedData.reasonFo
     `.trim()
 
     // Send email using Resend
-    // To use a custom "from" email, set RESEND_FROM_EMAIL in Vercel environment variables
-    // You can verify a single email or domain in Resend dashboard
+    // IMPORTANT: For Resend free tier, you can only send to verified email addresses
+    // Verify the recipient email at: https://resend.com/emails
+    // Or verify a domain at: https://resend.com/domains
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
     const toEmail = process.env.RESEND_TO_EMAIL || 'atlantaelite2500@gmail.com'
     
@@ -158,15 +159,20 @@ ${validatedData.reasonForSelling ? `Reason for Selling: ${validatedData.reasonFo
       text: emailText,
       html: emailHtml,
     })
-
+    
+    // Check for errors in the result
+    if (emailResult.error) {
+      console.error('Resend email error:', emailResult.error)
+      // If it's a verification error, provide helpful message
+      if (emailResult.error.message?.includes('testing emails') || emailResult.error.message?.includes('verify')) {
+        throw new Error(`Email verification required: You can only send to verified email addresses. Please verify "${toEmail}" at https://resend.com/emails or verify a domain at https://resend.com/domains`)
+      }
+      throw new Error(`Failed to send email: ${emailResult.error.message || 'Unknown error'}`)
+    }
+    
     // Log success with email result
     console.log(`Offer request submitted successfully for ${validatedData.email}`)
     console.log('Email sent:', emailResult)
-    
-    if (emailResult.error) {
-      console.error('Resend email error:', emailResult.error)
-      throw new Error(`Failed to send email: ${emailResult.error.message || 'Unknown error'}`)
-    }
 
     return NextResponse.json(
       { success: true, message: 'Offer request submitted successfully' },
