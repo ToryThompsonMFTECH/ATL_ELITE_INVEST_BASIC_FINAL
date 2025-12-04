@@ -46,10 +46,12 @@ export async function POST(request: NextRequest) {
     if (!resendApiKey) {
       console.error('RESEND_API_KEY environment variable is not set.')
       return NextResponse.json(
-        { error: 'Email service not configured. Please contact support.' },
+        { error: 'RESEND_API_KEY not configured. Please set RESEND_API_KEY in Vercel environment variables.' },
         { status: 500, headers: { 'Access-Control-Allow-Origin': '*' } }
       )
     }
+    
+    console.log('Resend API key found, length:', resendApiKey.length)
 
     const resend = new Resend(resendApiKey)
 
@@ -186,11 +188,14 @@ ${validatedData.reasonForSelling ? `Reason for Selling: ${validatedData.reasonFo
       )
     }
 
-    // Handle other errors
+    // Handle other errors - show actual error message for debugging
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    console.error('Returning error to client:', errorMessage)
+    
     return NextResponse.json(
       { 
-        error: 'Failed to submit offer request. Please try again or contact us directly.',
-        details: process.env.NODE_ENV === 'development' ? (error instanceof Error ? error.message : 'Unknown error') : undefined
+        error: errorMessage || 'Failed to submit offer request. Please try again or contact us directly.',
+        details: error instanceof Error ? error.stack : undefined
       },
       { status: 500, headers: { 'Access-Control-Allow-Origin': '*' } }
     )
