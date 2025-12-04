@@ -138,14 +138,13 @@ ${validatedData.reasonForSelling ? `Reason for Selling: ${validatedData.reasonFo
     `.trim()
 
     // Send email using Resend
-    // IMPORTANT: For Resend free tier, you can only send to verified email addresses
-    // Verify the recipient email at: https://resend.com/emails
-    // Or verify a domain at: https://resend.com/domains
-    const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
+    // IMPORTANT: Must use a "from" address from your verified domain: atlantaeliteinvestmentproperties.com
+    // This removes the "testing-only" restriction and allows sending to any recipient
+    const fromEmail = process.env.RESEND_FROM_EMAIL || 'no-reply@atlantaeliteinvestmentproperties.com'
     const toEmail = process.env.RESEND_TO_EMAIL || 'atlantaelite2500@gmail.com'
     
     if (!process.env.RESEND_FROM_EMAIL) {
-      console.warn('RESEND_FROM_EMAIL not set. Using default onboarding@resend.dev. Set this in Vercel for a custom sender address.')
+      console.warn('RESEND_FROM_EMAIL not set. Using default no-reply@atlantaeliteinvestmentproperties.com from verified domain.')
     }
     
     console.log('Sending email to:', toEmail)
