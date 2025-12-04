@@ -8,14 +8,14 @@ export default function Team() {
     {
       name: 'Stefon Rolax',
       role: 'Founder & CEO',
-      bio: 'An Atlanta native with decades of service in real estate investment, Stefon leads our team with deep local expertise and unwavering integrity.',
+      bio: 'An Atlanta native with decades of service in real estate investment, Stefon leads our team with deep local expertise and unwavering integrity. His commitment to transparency and fair dealing has helped hundreds of homeowners navigate the selling process with confidence. Stefon&apos;s vision is to make real estate transactions simple, fast, and stress-free for every client we serve.',
       image: '/images/CEOpic.png',
       rotate: true, // Flag to rotate CEO image
     },
     {
       name: 'Charise Rolax',
       role: 'Operations Manager',
-      bio: 'Charise ensures every transaction runs smoothly, making the selling process seamless for our clients.',
+      bio: 'Charise ensures every transaction runs smoothly, making the selling process seamless for our clients. With meticulous attention to detail and exceptional organizational skills, she coordinates all aspects of the sale from initial offer to closing. Her dedication to client satisfaction means you&apos;ll always know exactly where you stand in the process.',
       image: '/images/OpsManager.png',
     },
   ]
