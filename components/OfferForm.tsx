@@ -94,6 +94,7 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
 
   // Prevent body scroll when modal is open
   useEffect(() => {
+    console.log('showModal state changed:', showModal)
     if (showModal) {
       document.body.style.overflow = 'hidden'
     } else {
@@ -109,8 +110,11 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
       {/* Thank You Modal */}
       {showModal && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn"
           onClick={() => setShowModal(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="modal-title"
         >
           <div 
             className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative animate-slideUp"
@@ -138,7 +142,7 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
 
             {/* Content */}
             <div className="text-center">
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+              <h3 id="modal-title" className="text-2xl font-bold text-gray-900 mb-3">
                 Thank You!
               </h3>
               <p className="text-gray-700 mb-4">
