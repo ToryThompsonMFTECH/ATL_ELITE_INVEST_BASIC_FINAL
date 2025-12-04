@@ -136,11 +136,17 @@ ${validatedData.reasonForSelling ? `Reason for Selling: ${validatedData.reasonFo
     `.trim()
 
     // Send email using Resend
+    // To use a custom "from" email, set RESEND_FROM_EMAIL in Vercel environment variables
+    // You can verify a single email or domain in Resend dashboard
     const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
+    
+    if (!process.env.RESEND_FROM_EMAIL) {
+      console.warn('RESEND_FROM_EMAIL not set. Using default onboarding@resend.dev. Set this in Vercel for a custom sender address.')
+    }
     
     await resend.emails.send({
       from: fromEmail,
-      to: 'mftechconsulting@gmail.com',
+      to: 'atlantaelite2500@gmail.com',
       replyTo: validatedData.email,
       subject: `New Cash Offer Request from ${validatedData.fullName}`,
       text: emailText,
