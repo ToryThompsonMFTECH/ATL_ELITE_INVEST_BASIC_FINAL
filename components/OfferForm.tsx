@@ -50,6 +50,7 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
     setShowModal(false)
 
     try {
+      console.log('Submitting form with data:', data)
       const response = await fetch('/api/send-offer', {
         method: 'POST',
         headers: {
@@ -58,7 +59,19 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
         body: JSON.stringify(data),
       })
 
-      const result = await response.json()
+      console.log('Response status:', response.status, response.statusText)
+      console.log('Response ok:', response.ok)
+
+      let result
+      try {
+        result = await response.json()
+        console.log('Response JSON:', result)
+      } catch (jsonError) {
+        console.error('Failed to parse JSON response:', jsonError)
+        const text = await response.text()
+        console.error('Response text:', text)
+        throw new Error('Invalid response from server')
+      }
 
       if (!response.ok) {
         console.error('Form submission error:', result)
@@ -69,6 +82,9 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
       setSubmitStatus('success')
       setShowModal(true)
       reset()
+      
+      // Force a re-render check
+      console.log('Modal state set to true, showModal should be:', true)
     } catch (error) {
       console.error('Form submission catch error:', error)
       setSubmitStatus('error')
@@ -104,6 +120,9 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
       document.body.style.overflow = 'unset'
     }
   }, [showModal])
+
+  // Debug: Log when component renders with modal state
+  console.log('OfferForm render - showModal:', showModal, 'submitStatus:', submitStatus)
 
   return (
     <>
