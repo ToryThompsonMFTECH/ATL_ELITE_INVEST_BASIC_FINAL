@@ -10,18 +10,13 @@ export default function Team() {
       role: 'Founder & CEO',
       bio: 'An Atlanta native with decades of service in real estate investment, Stefon leads our team with deep local expertise and unwavering integrity.',
       image: '/images/CEOpic.png',
+      rotate: true, // Flag to rotate CEO image
     },
     {
       name: 'Charise Rolax',
       role: 'Operations Manager',
       bio: 'Charise ensures every transaction runs smoothly, making the selling process seamless for our clients.',
       image: '/images/OpsManager.png',
-    },
-    {
-      name: 'Michael Rodriguez',
-      role: 'Property Specialist',
-      bio: 'Michael evaluates properties and creates fair offers, helping homeowners get the best value.',
-      image: '/images/PropSpecial.png',
     },
   ]
 
@@ -34,9 +29,9 @@ export default function Team() {
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
         {teamMembers.map((member, index) => {
-          const TeamMemberImage = ({ imageSrc, name }: { imageSrc: string; name: string }) => {
+          const TeamMemberImage = ({ imageSrc, name, rotate }: { imageSrc: string; name: string; rotate?: boolean }) => {
             const [imageError, setImageError] = useState(false)
             
             if (imageError) {
@@ -55,6 +50,7 @@ export default function Team() {
                 className="object-cover group-hover:scale-110 transition-transform duration-300"
                 sizes="192px"
                 onError={() => setImageError(true)}
+                style={rotate ? { transform: 'rotate(45deg) scale(1.5)' } : undefined}
               />
             )
           }
@@ -76,7 +72,7 @@ export default function Team() {
                   e.currentTarget.style.boxShadow = '0 20px 60px rgba(0, 0, 0, 0.3), 0 10px 30px rgba(0, 0, 0, 0.2), 0 0 40px rgba(4, 120, 87, 0.15)'
                 }}
               >
-                <TeamMemberImage imageSrc={member.image} name={member.name} />
+                <TeamMemberImage imageSrc={member.image} name={member.name} rotate={member.rotate} />
               </div>
             <h3 className="text-2xl font-bold text-gray-900 mb-2">{member.name}</h3>
             <p className="text-primary-600 font-semibold mb-4">{member.role}</p>
