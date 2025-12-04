@@ -50,7 +50,7 @@ export default function Team() {
                 className="object-cover group-hover:scale-110 transition-transform duration-300"
                 sizes="192px"
                 onError={() => setImageError(true)}
-                style={rotate ? { transform: 'rotate(45deg) scale(1.5)' } : undefined}
+                style={rotate ? { transform: 'rotate(45deg) scale(0.8)' } : undefined}
               />
             )
           }
