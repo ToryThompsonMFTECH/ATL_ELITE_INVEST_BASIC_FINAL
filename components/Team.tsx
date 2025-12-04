@@ -12,9 +12,9 @@ export default function Team() {
       image: '/images/CEOpic.png',
     },
     {
-      name: 'Elise Warren',
+      name: 'Charise Rolax',
       role: 'Operations Manager',
-      bio: 'Elise ensures every transaction runs smoothly, making the selling process seamless for our clients.',
+      bio: 'Charise ensures every transaction runs smoothly, making the selling process seamless for our clients.',
       image: '/images/OpsManager.png',
     },
     {
