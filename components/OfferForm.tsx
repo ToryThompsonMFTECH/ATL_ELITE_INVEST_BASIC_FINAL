@@ -47,6 +47,7 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
     setIsSubmitting(true)
     setSubmitStatus('idle')
     setErrorMessage('')
+    setShowModal(false)
 
     try {
       const response = await fetch('/api/send-offer', {
@@ -60,17 +61,21 @@ export default function OfferForm({ className = '' }: OfferFormProps) {
       const result = await response.json()
 
       if (!response.ok) {
+        console.error('Form submission error:', result)
         throw new Error(result.error || 'Failed to submit form')
       }
 
+      console.log('Form submitted successfully:', result)
       setSubmitStatus('success')
       setShowModal(true)
       reset()
     } catch (error) {
+      console.error('Form submission catch error:', error)
       setSubmitStatus('error')
       setErrorMessage(
         error instanceof Error ? error.message : 'An unexpected error occurred. Please try again.'
       )
+      setShowModal(false)
     } finally {
       setIsSubmitting(false)
     }

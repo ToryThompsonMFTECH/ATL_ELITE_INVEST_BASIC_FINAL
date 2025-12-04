@@ -144,7 +144,7 @@ ${validatedData.reasonForSelling ? `Reason for Selling: ${validatedData.reasonFo
       console.warn('RESEND_FROM_EMAIL not set. Using default onboarding@resend.dev. Set this in Vercel for a custom sender address.')
     }
     
-    await resend.emails.send({
+    const emailResult = await resend.emails.send({
       from: fromEmail,
       to: 'atlantaelite2500@gmail.com',
       replyTo: validatedData.email,
@@ -153,8 +153,14 @@ ${validatedData.reasonForSelling ? `Reason for Selling: ${validatedData.reasonFo
       html: emailHtml,
     })
 
-    // Log success
+    // Log success with email result
     console.log(`Offer request submitted successfully for ${validatedData.email}`)
+    console.log('Email sent:', emailResult)
+    
+    if (emailResult.error) {
+      console.error('Resend email error:', emailResult.error)
+      throw new Error(`Failed to send email: ${emailResult.error.message || 'Unknown error'}`)
+    }
 
     return NextResponse.json(
       { success: true, message: 'Offer request submitted successfully' },
