@@ -36,6 +36,16 @@ export async function OPTIONS() {
 
 export async function POST(request: NextRequest) {
   try {
+    // DEBUG: Log environment variable status
+    console.log('=== ENVIRONMENT VARIABLE DEBUG ===')
+    console.log('RESEND_API_KEY exists:', !!process.env.RESEND_API_KEY)
+    console.log('RESEND_API_KEY length:', process.env.RESEND_API_KEY?.length || 0)
+    console.log('RESEND_API_KEY starts with:', process.env.RESEND_API_KEY?.substring(0, 10) || 'N/A')
+    console.log('All RESEND env vars:', Object.keys(process.env).filter(key => key.startsWith('RESEND')))
+    console.log('NODE_ENV:', process.env.NODE_ENV)
+    console.log('VERCEL_ENV:', process.env.VERCEL_ENV)
+    console.log('================================')
+    
     // Parse and validate request body
     const body = await request.json()
     const validatedData = offerFormSchema.parse(body)
@@ -45,6 +55,7 @@ export async function POST(request: NextRequest) {
     
     if (!resendApiKey) {
       console.error('RESEND_API_KEY environment variable is not set.')
+      console.error('Available env vars starting with RESEND:', Object.keys(process.env).filter(key => key.startsWith('RESEND')))
       return NextResponse.json(
         { error: 'RESEND_API_KEY not configured. Please set RESEND_API_KEY in Vercel environment variables.' },
         { status: 500, headers: { 'Access-Control-Allow-Origin': '*' } }
